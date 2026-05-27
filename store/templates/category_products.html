@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-4">
+
+    <!-- Category Title -->
+    <div class="mb-4">
+        <h3 class="fw-bold">{{ category.name }}</h3>
+        <hr>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row g-4">
+        {% for product in products %}
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card h-100 shadow-sm border-0 product-card">
+
+                <!-- Product Image -->
+                <div class="position-relative">
+                    <img src="{{ product.image.url }}"
+                         class="card-img-top p-3"
+                         style="height:220px; object-fit:contain;"
+                         alt="{{ product.name }}">
+
+                    <!-- Badge -->
+                    <span class="badge bg-warning text-dark position-absolute top-0 start-0 m-2">
+                        Bestseller
+                    </span>
+                </div>
+
+                <!-- Product Details -->
+                <div class="card-body d-flex flex-column">
+                    <h6 class="card-title fw-semibold text-truncate">
+                        {{ product.name }}
+                    </h6>
+
+                    <p class="mb-1">
+                        <span class="fw-bold fs-5 text-success">₹{{ product.price }}</span>
+                    </p>
+
+                    <small class="text-muted mb-2">
+                        Free delivery by Amazon
+                    </small>
+
+                    <!-- Buttons -->
+                    <div class="mt-auto d-grid gap-2">
+                        <a href="" class="btn btn-warning fw-semibold">
+                            Add to Cart
+                        </a>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-primary btn-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

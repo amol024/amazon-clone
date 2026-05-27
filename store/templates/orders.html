@@ -1,0 +1,38 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 class="mb-4">My Orders</h3>
+
+{% if orders %}
+    {% for order in orders %}
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Order ID: {{ order.id }}</h5>
+                <p class="mb-1">
+                    <strong>Date:</strong> {{ order.created_at|date:"d M Y, h:i A" }}
+                </p>
+                <p class="mb-1">
+                    <strong>Total Amount:</strong> ₹{{ order.total_amount }}
+                </p>
+
+                <hr>
+
+                <h6>Items:</h6>
+                <ul class="list-group list-group-flush">
+                    {% for item in order.orderitem_set.all %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ item.product.name }} (x{{ item.quantity }})
+                            <span>₹{{ item.price }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No orders found.</p>
+{% endif %}
+
+{% endblock %}

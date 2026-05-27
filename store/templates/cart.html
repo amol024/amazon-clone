@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-4">
+
+    <h3 class="fw-bold mb-4">🛒 Shopping Cart</h3>
+
+    <div class="row">
+        <!-- 🔹 Cart Items -->
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+
+                    <table class="table align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th style="width:120px;">Qty</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ item.product.image.url }}" class="img-thumbnail me-3"
+                                            style="width:80px; height:80px; object-fit:contain;">
+                                        <div>
+                                            <h6 class="mb-1">{{ item.product.name }}</h6>
+                                            <small class="text-success">In Stock</small>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="fw-semibold">₹{{ item.product.price }}</td>
+
+                                <td>
+                                    <div class="input-group input-group-sm">
+                                        <button class="btn btn-outline-secondary"><a
+                                                href="{% url 'decrease_qty' item.id %}"
+                                                style="text-decoration:none">−</a></button>
+                                        <input type="text" class="form-control text-center" value="{{ item.quantity }}"
+                                            readonly>
+                                        <button class="btn btn-outline-secondary"><a
+                                                href="{% url 'increase_qty' item.id %}"
+                                                style="text-decoration:none">+</a></button>
+                                    </div>
+                                </td>
+
+                                <td class="fw-bold">
+                                    ₹{{ item.product.price|floatformat:2 }}
+                                </td>
+
+                                <td>
+                                    <a href="{% url 'remove_from_cart' item.id %}"
+                                        class="text-danger small text-decoration-none">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    Your cart is empty
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔹 Price Summary -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">Price Details</h5>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span>₹{{ total }}</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Delivery</span>
+                        <span class="text-success">FREE</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Total Amount</span>
+                        <span>₹{{ total }}</span>
+                    </div>
+
+                    <button class="btn btn-warning w-100 mt-3 fw-semibold">
+                        <a href="{% url 'checkout' %}" style="text-decoration:none">Proceed to Checkout</a>
+                    </button>
+
+                    <small class="text-muted d-block mt-2 text-center">
+                        Secure transaction
+                    </small>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
