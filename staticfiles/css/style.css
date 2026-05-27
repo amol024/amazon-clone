@@ -1,0 +1,47 @@
+/* .amazon-navbar {
+    background-color: #131921;
+    height: 60px;
+    padding: 0 16px;
+}
+
+.amazon-logo {
+    filter: brightness(0) invert(1);
+}
+
+.navbar .nav-link {
+    color: white;
+    padding: 0 10px;
+}
+
+.navbar .nav-link:hover {
+    color: #febd69;
+} */
+
+body {
+    background-color: red;
+}
+
+.register-card {
+    max-width: 400px;
+    margin: auto;
+    border-radius: 6px;
+}
+
+.register-card h2 {
+    font-weight: 500;
+}
+
+.btn-amazon {
+    background-color: #f0c14b;
+    border-color: #a88734;
+    color: #111;
+}
+
+.btn-amazon:hover {
+    background-color: #ddb347;
+    border-color: #a88734;
+}
+
+.small-link {
+    font-size: 13px;
+}
