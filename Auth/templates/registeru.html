@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Register Page{% endblock %}
+{% block content %}
+
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+
+    <div class="card register-card shadow-sm p-4">
+        {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error :-</strong> {{error}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        <!-- Logo -->
+        <div class="text-center mb-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo"
+                width="100">
+        </div>
+
+        <h2 class="mb-3">Create account</h2>
+
+        <form action="{% url 'registeru' %}" method="POST">
+            {% csrf_token %}
+
+            <!-- Name -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Your name</label>
+                <input type="text" class="form-control" name="username" placeholder="First and last name" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="At least 6 characters"
+                    required>
+                <div class="form-text">Passwords must be at least 6 characters.</div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Re-enter password</label>
+                <input type="password" class="form-control" name="cpassword" required>
+            </div>
+
+            <!-- Login Button -->
+            <button type="submit" class="btn btn-warning  w-100 mb-3">
+                Create your amazon account
+            </button>
+
+            <!-- Terms -->
+            <p class="small-link">
+                By creating an account, you agree to Amazon's
+                <a href="#">Conditions of Use</a> and
+                <a href="#">Privacy Notice</a>.
+            </p>
+        </form>
+
+        <hr>
+
+        <!-- Login Redirect -->
+        <div class="text-center">
+            <p class="small-link mb-2">
+                Already have an account?
+                <a href="#">Sign in</a>
+        </div>
+
+        {% endblock %}
